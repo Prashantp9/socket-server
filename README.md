@@ -1,0 +1,2 @@
+# Fast_Fingers
+The MERN Typing Game with Socket.io is a web application that allows users to play a typing game. The game is designed to help users improve their typing speed and accuracy. The application is built using the MERN stack, which includes MongoDB, Express.js, React.js, and Node.js. Additionally, the application uses the Socket.io library to enable real-time communication between the server and clients.
