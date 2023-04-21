@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Header from "components/Header";
-import Test from "components/Test";
-import Result from "components/Result";
-import Footer from "components/Footer";
-import { State } from "store/reducer";
-import { setTimerId } from "store/actions";
-import { recordTest } from "helpers/recordTest";
 import "stylesheets/themes.scss";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import CommandPallet from "components/CommandPallet";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import Result from "components/Result";
+import { State } from "store/reducer";
+import Test from "components/Test";
+import { recordTest } from "helpers/recordTest";
+import { setTimerId } from "store/actions";
+import { useSocketHook } from "customHooks/useSetupHook";
 
 export default function App() {
+    useSocketHook();
     const {
         time: { timerId, timer },
         word: { currWord, typedWord, activeWordRef },

@@ -2,21 +2,42 @@ import "dotenv/config";
 
 import Express from "express";
 import { Server as SocketIOServer } from "socket.io";
+import cors from "cors";
 import { createServer } from "http";
 
+const socketCorsConfig = {
+  origin: `http://localhost:3000`,
+  credentials: true,
+};
+
 const app = Express();
+app.use(
+  cors({
+    origin: `http://localhost:3000`,
+    credentials: true,
+  })
+);
 // to run both express server and socket io simaltaneously
 const server = createServer(app);
 const io = new SocketIOServer(server, {
-  cors: "http://localhost:3000",
+  cors: socketCorsConfig,
 });
 
 io.on("connection", (socket) => {
   console.log(socket.id);
 });
-
 io.on("message", (msg) => {
   console.log(msg);
+});
+
+io.on("disconnected", () => {
+  console.log("user has been disconnected");
+});
+
+app.get("/fetchdata", (req, res) => {
+  res.status(200).json({
+    name: "prashant",
+  });
 });
 
 // main connection
