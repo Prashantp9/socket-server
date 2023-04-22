@@ -24,20 +24,11 @@ const io = new SocketIOServer(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log("SocketId", socket.id);
 });
+
 io.on("message", (msg) => {
   console.log(msg);
-});
-
-io.on("disconnected", () => {
-  console.log("user has been disconnected");
-});
-
-app.get("/fetchdata", (req, res) => {
-  res.status(200).json({
-    name: "prashant",
-  });
 });
 
 // main connection
