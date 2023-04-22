@@ -11,7 +11,6 @@ import { State } from "store/reducer";
 import Test from "components/Test";
 import { recordTest } from "helpers/recordTest";
 import { setTimerId } from "store/actions";
-import socket from "socketConnection/socketConnection";
 import useSocketHook from "customHooks/useSetupHook";
 
 export default function App() {

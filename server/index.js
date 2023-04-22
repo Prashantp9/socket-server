@@ -11,9 +11,11 @@ app.use(cors({ origin: "*" }));
 const server = createServer(app);
 // connectin to the socket server
 const io = socketConnection(server);
+let activeSockets = [];
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log("connected", socket.id);
+  socket.emit("server", "server is active");
 });
 
 server.listen(process.env.PORT, () => {
