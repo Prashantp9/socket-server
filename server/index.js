@@ -27,9 +27,13 @@ io.on("connection", (socket) => {
   console.log("SocketId", socket.id);
 });
 
-io.on("message", (msg) => {
+io.on("client", (msg) => {
   console.log(msg);
 });
+
+// setInterval(() => {
+//   io.emit("server", "hello from server side");
+// }, 100);
 
 // main connection
 server.listen(process.env.PORT, () => {

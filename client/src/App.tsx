@@ -11,10 +11,12 @@ import { State } from "store/reducer";
 import Test from "components/Test";
 import { recordTest } from "helpers/recordTest";
 import { setTimerId } from "store/actions";
-import { useSocketHook } from "customHooks/useSetupHook";
+import socket from "socketConnection/socketConnection";
+import useSocketHook from "customHooks/useSetupHook";
 
 export default function App() {
     useSocketHook();
+
     const {
         time: { timerId, timer },
         word: { currWord, typedWord, activeWordRef },
