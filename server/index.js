@@ -1,41 +1,24 @@
 import "dotenv/config";
 
 import Express from "express";
-import { Server as SocketIOServer } from "socket.io";
 import cors from "cors";
 import { createServer } from "http";
-
-const socketCorsConfig = {
-  origin: `http://localhost:3000`,
-  credentials: true,
-};
+import socketConnection from "./socketConnection/socketConnection.js";
 
 const app = Express();
-app.use(
-  cors({
-    origin: `http://localhost:3000`,
-    credentials: true,
-  })
-);
-// to run both express server and socket io simaltaneously
+app.use(cors({ origin: "*" }));
+
 const server = createServer(app);
-const io = new SocketIOServer(server, {
-  cors: socketCorsConfig,
-});
+const io = socketConnection(server);
 
 io.on("connection", (socket) => {
-  console.log("SocketId", socket.id);
+  console.log(socket.id);
+  socket.emit("server", "server is avctive");
+  socket.on("client", (msg) => {
+    console.log(msg);
+  });
 });
 
-io.on("client", (msg) => {
-  console.log(msg);
-});
-
-// setInterval(() => {
-//   io.emit("server", "hello from server side");
-// }, 100);
-
-// main connection
 server.listen(process.env.PORT, () => {
   console.log(`server is running on PORT ${process.env.PORT}`);
 });

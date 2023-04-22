@@ -8,6 +8,7 @@ const useSocketHook = (user) => {
         socket.on("server", (msg) => {
             console.log(msg);
         });
+        socket.emit("client", "fork");
     }, [user]);
 };
 
