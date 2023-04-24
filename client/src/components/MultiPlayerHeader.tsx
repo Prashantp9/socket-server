@@ -2,14 +2,16 @@ import "../stylesheets/MultiPlayerHeader.scss";
 
 import React, { useState } from "react";
 
+import { Value } from "sass";
 import { useSearchParams } from "react-router-dom";
+import useSocketroom from "customHooks/useSocketroom";
 import uuid from "react-uuid";
 
 const CreateRoomContainer = () => {
     const [uniqueId, setUniqueId] = useState(uuid());
     const [searchParams, setSearchParams] = useSearchParams();
     const setRoomParams = (id: string) => {
-        console.log(id);
+        useSocketroom.createRoom(id);
         setSearchParams({
             roomLink: id,
         });
@@ -28,11 +30,22 @@ const CreateRoomContainer = () => {
 };
 
 const JoinRoomContainer = () => {
+    const [joiningLink, setJoiningLink] = useState<string>("temp");
     return (
         <>
             <div className="create-rooom-component">
-                <div className="link-container">dohiafoiuhdfodhialodkifhj</div>
-                <button>Join Room</button>
+                <input
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setJoiningLink(e.target.value);
+                    }}
+                    value={joiningLink}
+                />
+                <button
+                    onClick={() => {
+                        useSocketroom.createRoom(joiningLink);
+                    }}>
+                    Join Room
+                </button>
             </div>
         </>
     );
@@ -53,7 +66,7 @@ const MultiPlayerHeader = () => {
                     </div>
                     <div
                         className="join-room-container"
-                        onClick={() => setJoinRoom(!joinRoom)}>
+                        onClick={() => setJoinRoom(true)}>
                         Join
                         {joinRoom && <JoinRoomContainer />}
                     </div>

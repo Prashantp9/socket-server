@@ -17,8 +17,9 @@ let activeSockets = [];
 io.on("connection", (socket) => {
   console.log("connected", socket.id);
   socket.emit("server", "server is active");
-  socket.on("disconnect", () => {
-    console.log("socket disconnected");
+  socket.on("join", (room) => {
+    console.log("room", room);
+    socket.join(room);
   });
 });
 

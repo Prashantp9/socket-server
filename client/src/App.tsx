@@ -69,11 +69,11 @@ export default function App() {
 
     return (
         <>
-            {/* <Header /> */}
-            <MultiPlayerHeader />
+            <Header />
+            {/* <MultiPlayerHeader /> */}
             {showPallet && <CommandPallet setShowPallet={setShowPallet} />}
             {timer ? <Test /> : <Result />}
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }
