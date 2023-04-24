@@ -1,28 +1,29 @@
 import "../stylesheets/MultiPlayerHeader.scss";
 
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import React, { useState } from "react";
+import useSocketHook, { socket } from "customHooks/useSetupHook";
 
 import { Value } from "sass";
-import { useSearchParams } from "react-router-dom";
 import useSocketroom from "customHooks/useSocketroom";
 import uuid from "react-uuid";
 
-const CreateRoomContainer = () => {
+const CreateRoomContainer = (prop: any) => {
+    const navigate = useNavigate();
     const [uniqueId, setUniqueId] = useState(uuid());
     const [searchParams, setSearchParams] = useSearchParams();
-    const setRoomParams = (id: string) => {
-        useSocketroom.createRoom(id);
-        setSearchParams({
-            roomLink: id,
-        });
+    const setRoomParams = () => {
+        useSocketroom.createRoom(socket.id);
+        navigate(`fast_fingers/${socket.id}`);
+        // setSearchParams({
+        //     roomLink: id,
+        // });
     };
     return (
         <>
             <div className="create-rooom-component">
-                <div className="link-container">{uniqueId}</div>
-                <button onClick={() => setRoomParams(uniqueId)}>
-                    Create Room
-                </button>
+                <div className="link-container">{socket.id}</div>
+                <button onClick={() => setRoomParams()}>Create Room</button>
                 <button>Copy Link</button>
             </div>
         </>
@@ -30,11 +31,13 @@ const CreateRoomContainer = () => {
 };
 
 const JoinRoomContainer = () => {
-    const [joiningLink, setJoiningLink] = useState<string>("temp");
+    const navigate = useNavigate();
+    const [joiningLink, setJoiningLink] = useState<string>("");
     return (
         <>
             <div className="create-rooom-component">
                 <input
+                    placeholder="enter joining link here"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setJoiningLink(e.target.value);
                     }}
@@ -43,6 +46,7 @@ const JoinRoomContainer = () => {
                 <button
                     onClick={() => {
                         useSocketroom.createRoom(joiningLink);
+                        navigate(`/fast_fingers/${joiningLink}`);
                     }}>
                     Join Room
                 </button>
@@ -53,6 +57,8 @@ const JoinRoomContainer = () => {
 const MultiPlayerHeader = () => {
     const [createRoom, setCreateRoom] = useState(false);
     const [joinRoom, setJoinRoom] = useState(false);
+    const [socketId] = useSocketHook();
+    console.log("Accessing state socket", socketId);
 
     return (
         <>
@@ -62,7 +68,9 @@ const MultiPlayerHeader = () => {
                         className="create-room-container"
                         onClick={() => setCreateRoom(!createRoom)}>
                         Create
-                        {createRoom && <CreateRoomContainer />}
+                        {createRoom && (
+                            <CreateRoomContainer socketId={socketId} />
+                        )}
                     </div>
                     <div
                         className="join-room-container"

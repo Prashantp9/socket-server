@@ -1,7 +1,9 @@
 import "index.scss";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import App from "App";
-import { BrowserRouter } from "react-router-dom";
+import MultiPlayerHeader from "components/MultiPlayerHeader";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -11,7 +13,10 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <BrowserRouter>
-                <App />
+                <Routes>
+                    <Route index element={<MultiPlayerHeader />} />
+                    <Route path="/fast_fingers/:id" element={<App />} />
+                </Routes>
             </BrowserRouter>
         </Provider>
     </React.StrictMode>,

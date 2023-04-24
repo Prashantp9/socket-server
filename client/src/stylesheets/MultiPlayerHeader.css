@@ -143,4 +143,16 @@
   font-size: 1rem;
   padding: 0.5rem;
   white-space: nowrap;
+}
+
+.create-rooom-component > input {
+  border: 1px solid #323232;
+  color: #0e0e0e;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  white-space: nowrap;
+  outline: none;
+  height: 1rem;
+  border-radius: 0.375rem;
 }/*# sourceMappingURL=MultiPlayerHeader.css.map */

@@ -2,6 +2,7 @@ import "stylesheets/themes.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import CommandPallet from "components/CommandPallet";
 import Footer from "components/Footer";
@@ -12,10 +13,12 @@ import { State } from "store/reducer";
 import Test from "components/Test";
 import { recordTest } from "helpers/recordTest";
 import { setTimerId } from "store/actions";
-import useSocketHook from "customHooks/useSetupHook";
+import useSocketroom from "customHooks/useSocketroom";
 
 export default function App() {
-    useSocketHook();
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const { id } = useParams();
 
     const {
         time: { timerId, timer },
@@ -67,13 +70,22 @@ export default function App() {
         }
     }, [dispatch, timer, timerId]);
 
+    useEffect(() => {
+        useSocketroom.getActiveMembers(id);
+    }, []);
+
     return (
         <>
             <Header />
             {/* <MultiPlayerHeader /> */}
-            {showPallet && <CommandPallet setShowPallet={setShowPallet} />}
-            {timer ? <Test /> : <Result />}
-            {/* <Footer /> */}
+            <input
+                onChange={(e) => {
+                    useSocketroom.sendKeyDown(e.target.value, id);
+                }}
+            />
+            {/* {showPallet && <CommandPallet setShowPallet={setShowPallet} />} */}
+            {/* {timer ? <Test /> : <Result />} */}
+            <Footer />
         </>
     );
 }
