@@ -13,8 +13,8 @@ const CreateRoomContainer = (prop: any) => {
     const [uniqueId, setUniqueId] = useState(uuid());
     const [searchParams, setSearchParams] = useSearchParams();
     const setRoomParams = () => {
-        useSocketroom.createRoom(socket.id);
-        navigate(`fast_fingers/${socket.id}`);
+        useSocketroom.createRoom(socket.id + "room");
+        navigate(`fast_fingers/${socket.id + "room"}`);
         // setSearchParams({
         //     roomLink: id,
         // });
@@ -22,7 +22,7 @@ const CreateRoomContainer = (prop: any) => {
     return (
         <>
             <div className="create-rooom-component">
-                <div className="link-container">{socket.id}</div>
+                <div className="link-container">{socket.id + "room"}</div>
                 <button onClick={() => setRoomParams()}>Create Room</button>
                 <button>Copy Link</button>
             </div>

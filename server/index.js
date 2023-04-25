@@ -26,14 +26,11 @@ io.on("connection", (socket) => {
     console.log(io.sockets.adapter.rooms, [
       ...io.sockets.adapter.rooms.get(room),
     ]);
+    // io.to(room)
     io.to(room).emit("room_members", {
       members: [...io.sockets.adapter.rooms.get(room)],
       temp: "temp",
     });
-    // socket.emit("room_members", {
-    //   members: io.sockets.adapter.rooms[room],
-    //   temp: "temp",
-    // });
   });
   socket.on("keydown", (data) => {
     console.log(socket.id, data);
