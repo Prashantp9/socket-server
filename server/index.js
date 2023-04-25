@@ -21,6 +21,9 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log(io.sockets.adapter.rooms);
   });
+  socket.on("StartGame", (room) => {
+    io.to(room).emit("start", { start: true });
+  });
   socket.on("create", (room) => {
     socket.join(room);
     console.log(io.sockets.adapter.rooms, [

@@ -11,6 +11,9 @@ const useSocketroom = {
     getActiveMembers: (room) => {
         socket.emit("activeRoom", room);
     },
+    startGame: (room) => {
+        socket.emit("StartGame", room);
+    },
 };
 
 export default useSocketroom;

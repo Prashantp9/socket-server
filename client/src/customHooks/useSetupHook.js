@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = new io("http://localhost:5000");
+const socket = new io("http://192.168.1.5:5000");
 
 const useSocketHook = () => {
     useEffect(() => {

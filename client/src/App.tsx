@@ -77,8 +77,8 @@ export default function App() {
 
     return (
         <>
-            {/* <PlayersInfoContainer /> */}
-            {/* <Header /> */}
+            <PlayersInfoContainer />
+            <Header />
             {/* <MultiPlayerHeader /> */}
             {/* <input
                 onChange={(e) => {
