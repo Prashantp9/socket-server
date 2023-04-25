@@ -1,0 +1,23 @@
+.players-profile-base-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    gap: 2rem;
+}
+
+.players-profile-card {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inner-profile-container {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 4rem;
+    background: linear-gradient(97.06deg, #f5489d 2.9%, #fe7172 97.24%);
+    margin-bottom: 0rem;
+}

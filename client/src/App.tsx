@@ -8,6 +8,7 @@ import CommandPallet from "components/CommandPallet";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import MultiPlayerHeader from "components/MultiPlayerHeader";
+import PlayersInfoContainer from "components/PlayersInfoContainer";
 import Result from "components/Result";
 import { State } from "store/reducer";
 import Test from "components/Test";
@@ -76,15 +77,17 @@ export default function App() {
 
     return (
         <>
-            <Header />
+            {/* <PlayersInfoContainer /> */}
+            {/* <Header /> */}
             {/* <MultiPlayerHeader /> */}
-            <input
+            {/* <input
                 onChange={(e) => {
                     useSocketroom.sendKeyDown(e.target.value, id);
                 }}
-            />
-            {/* {showPallet && <CommandPallet setShowPallet={setShowPallet} />} */}
-            {/* {timer ? <Test /> : <Result />} */}
+            /> */}
+
+            {showPallet && <CommandPallet setShowPallet={setShowPallet} />}
+            {timer ? <Test /> : <Result />}
             <Footer />
         </>
     );
